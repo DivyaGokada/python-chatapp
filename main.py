@@ -35,7 +35,9 @@ class RegisterValidator(BaseModel):
 
 @app.post("/api/register")
 def register_user(user: RegisterValidator, response: Response):
+    print('control here register user', user, response)
     response.set_cookie(key="X-Authorization", value=user.username, httponly=True)
+    # return response
 
 
 class SocketManager:

@@ -39,13 +39,21 @@
             $("#user-form").on("submit", function(e){
                 e.preventDefault();
                 var current_user = $("#user_input").val();
-                if (current_user){
-                    data = {"username": current_user};
-                    $.post('/api/register', JSON.stringify(data), function(response){
-                        $(".chat-body").removeClass("hide");
-                        $(".chat-register").addClass("hide");
-                        window.location.href = "/chat";
-                    });
+                if (current_user) {
+                    data = { "username": current_user };
+                    $.ajax({
+                        url: '/api/register',
+                        type: "POST",
+                        data: JSON.stringify(data),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (response) {
+                            console.log(response);
+                            $(".chat-body").removeClass("hide");
+                            $(".chat-register").addClass("hide");
+                            window.location.href = "/chat";
+                        }
+                    })
                 }
             });
         });
