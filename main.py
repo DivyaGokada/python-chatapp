@@ -4,11 +4,35 @@ from fastapi import (
 from typing import List
 from pydantic import BaseModel
 from fastapi.templating import Jinja2Templates
+from pymongo import MongoClient
 
 app = FastAPI()
 
 # locate templates
 templates = Jinja2Templates(directory="templates")
+  
+# creation of MongoClient
+client=MongoClient()
+  
+# Connect with the portnumber and host
+client = MongoClient("mongodb://localhost:27017/")
+  
+# Access database
+mydatabase = client['name_of_the_database']
+  
+# Access collection of the database
+mycollection=mydatabase['myTable']
+  
+# dictionary to be added in the database
+rec={
+'title': 'MongoDB and Python', 
+'description': 'MongoDB is no SQL database', 
+'tags': ['mongodb', 'database', 'NoSQL'], 
+'viewers': 104 
+}
+  
+# inserting the data in the database
+mycollection.insert_one(rec)
 
 
 @app.get("/")
@@ -35,9 +59,7 @@ class RegisterValidator(BaseModel):
 
 @app.post("/api/register")
 def register_user(user: RegisterValidator, response: Response):
-    print('control here register user', user, response)
     response.set_cookie(key="X-Authorization", value=user.username, httponly=True)
-    # return response
 
 
 class SocketManager:
@@ -69,12 +91,15 @@ async def chat(websocket: WebSocket):
             "message": "got connected"
         }
         await manager.broadcast(response)
+        mycollection.insert_one(response)
         try:
             while True:
                 data = await websocket.receive_json()
                 await manager.broadcast(data)
+                mycollection.insert_one(data)
         except WebSocketDisconnect:
             manager.disconnect(websocket, sender)
             response['message'] = "left"
             await manager.broadcast(response)
+            mycollection.insert_one(response)
 
