@@ -1,0 +1,43 @@
+[{
+  "_id": {
+    "$oid": "635f7d138a2d3da3d3b62326"
+  },
+  "sender": "Apurup",
+  "message": "got connected"
+},{
+  "_id": {
+    "$oid": "635f7d7e8a2d3da3d3b62327"
+  },
+  "sender": "Kumar",
+  "message": "got connected"
+},{
+  "_id": {
+    "$oid": "635f7d918a2d3da3d3b62328"
+  },
+  "sender": "Apurup",
+  "message": "Hi, I am Apurup"
+},{
+  "_id": {
+    "$oid": "635f7d9d8a2d3da3d3b62329"
+  },
+  "sender": "Kumar",
+  "message": "Hi Apurup, I am Kumar"
+},{
+  "_id": {
+    "$oid": "635f7da68a2d3da3d3b6232a"
+  },
+  "sender": "Apurup",
+  "message": "Glad to meet you"
+},{
+  "_id": {
+    "$oid": "635f7db08a2d3da3d3b6232b"
+  },
+  "sender": "Kumar",
+  "message": "Glad to meet you too"
+},{
+  "_id": {
+    "$oid": "635f7e328a2d3da3d3b6232c"
+  },
+  "sender": "Apurup",
+  "message": "left"
+}]
